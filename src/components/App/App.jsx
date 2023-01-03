@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
-// import { Form } from "../App/App.styled";
+import { Container } from '../App/App.styled';
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -16,18 +16,23 @@ export class App extends Component {
     filter: '',
   };
 
+  // Не можу відфільтровувати імена контактів, які вже є в стейті!!!!!
+
   formSubmitHandler = ({ name, number }) => {
     const newContact = {
-      id: nanoid(),
+      id: nanoid(7),
       name,
       number,
     };
 
-    const findeNameState = this.state.contacts.map(contact => contact.name);
-    if (findeNameState) {
-      console.log('wwww');
-    }
-    console.log(newContact);
+    const data = this.state.contacts.map(contact => contact.name);
+    const findName = data.filter(item => item.includes(newContact.name));
+    console.log(findName);
+    this.setState(prevState => {
+      return {
+        contacts: [newContact, ...prevState.contacts],
+      };
+    });
   };
 
   onDelete = contactId => {
@@ -55,7 +60,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm formSubmitHandler={this.formSubmitHandler} />
 
@@ -65,7 +70,7 @@ export class App extends Component {
           filter={this.state.filter}
         />
         <ContactList contacts={this.state.contacts} onDelete={this.onDelete} />
-      </div>
+      </Container>
     );
   }
 }

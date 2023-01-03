@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import { Form } from './ContactForm.styled';
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import { BtnForm, Form, InputForm, TitleForm } from './ContactForm.styled';
 
 const initialState = {
   name: '',
   number: '',
-}
+};
 export class ContactForm extends Component {
   state = {
     name: ' ',
@@ -16,29 +17,26 @@ export class ContactForm extends Component {
     this.setState({
       [name]: value,
     });
-    
   };
-
 
   onSubmitForm = event => {
     event.preventDefault();
-  
+
     this.props.formSubmitHandler(this.state);
     this.reset();
-    
   };
 
   reset = () => {
     this.setState(initialState);
-}
+  };
 
   render() {
     return (
       <div>
         <Form onSubmit={this.onSubmitForm}>
+          <TitleForm>Name</TitleForm>
           <label>
-            Name
-            <input
+            <InputForm
               type="text"
               name="name"
               value={this.state.name}
@@ -48,10 +46,9 @@ export class ContactForm extends Component {
               required
             />
           </label>
-
+          <TitleForm>Number</TitleForm>
           <label>
-            Number
-            <input
+            <InputForm
               type="tel"
               name="number"
               value={this.state.number}
@@ -61,9 +58,13 @@ export class ContactForm extends Component {
               required
             />
           </label>
-          <button type="submit">Add contact</button>
+          <BtnForm type="submit">Add contact</BtnForm>
         </Form>
       </div>
     );
   }
 }
+
+ContactForm.propTypes = {
+  formSubmitHandler: propTypes.func.isRequired,
+};
