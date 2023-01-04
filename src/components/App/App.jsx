@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
-import { Container } from '../App/App.styled';
+import { Container, Title } from '../App/App.styled';
 import { nanoid } from 'nanoid';
 
 export class App extends Component {
@@ -16,8 +16,6 @@ export class App extends Component {
     filter: '',
   };
 
-  // Не можу відфільтровувати імена контактів, які вже є в стейті!!!!!
-
   formSubmitHandler = ({ name, number }) => {
     const newContact = {
       id: nanoid(7),
@@ -25,14 +23,21 @@ export class App extends Component {
       number,
     };
 
-    const data = this.state.contacts.map(contact => contact.name);
-    const findName = data.filter(item => item.includes(newContact.name));
-    console.log(findName);
-    this.setState(prevState => {
-      return {
-        contacts: [newContact, ...prevState.contacts],
-      };
-    });
+    const data = this.state.contacts.map(contact => contact.name.toLowerCase());
+
+    const findName = data.some(item =>
+      item.includes(newContact.name.toLowerCase())
+    );
+
+    if (findName) {
+      return alert(`${newContact.name} is already in contacts!`);
+    } else {
+      this.setState(prevState => {
+        return {
+          contacts: [newContact, ...prevState.contacts],
+        };
+      });
+    }
   };
 
   onDelete = contactId => {
@@ -61,10 +66,10 @@ export class App extends Component {
   render() {
     return (
       <Container>
-        <h1>Phonebook</h1>
+        <Title>Phonebook</Title>
         <ContactForm formSubmitHandler={this.formSubmitHandler} />
 
-        <h2>Contacts</h2>
+        <Title>Contacts</Title>
         <Filter
           onChangeFilter={this.onChangeFilter}
           filter={this.state.filter}

@@ -30,7 +30,7 @@ export const InputForm = styled.input`
 
 export const TitleForm = styled.h2`
   font-size: ${p => p.theme.fontSizes[1]}px;
-  margin-bottom: ${p => p.theme.space[3]}px;
+  margin: ${p => p.theme.space[3]}px;
 `;
 
 export const BtnForm = styled.button`

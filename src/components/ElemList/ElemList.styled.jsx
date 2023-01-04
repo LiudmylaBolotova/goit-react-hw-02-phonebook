@@ -7,8 +7,8 @@ export const BtnList = styled.button`
   border: ${p => p.theme.borders.small};
   border-radius: ${p => p.theme.radii.btnRound}px;
 
-  margin-top: ${p => p.theme.space[5]}px;
-  margin-left: ${p => p.theme.space[5]}px;
+  margin-top: ${p => p.theme.space[3]}px;
+  margin-left: ${p => p.theme.space[3]}px;
 
   cursor: pointer;
 
@@ -28,8 +28,7 @@ export const BtnList = styled.button`
 export const Element = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
 
-  margin-bottom: ${p => p.theme.space[5]}px;
+  padding-bottom: ${p => p.theme.space[4]}px;
 `;

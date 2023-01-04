@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const List = styled.ol`
+
   border: ${p => p.theme.borders.normal};
   border-radius: ${p => p.theme.radii.round}px;
   color: ${p => p.theme.colors.text};

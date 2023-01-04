@@ -13,3 +13,7 @@ export const Container = styled.div`
   background-color: ${p => p.theme.colors.backgroundColor};
   border: ${p => p.theme.borders.normal};
 `;
+
+export const Title = styled.h1`
+  margin: ${p => p.theme.space[4]}px;
+`;
