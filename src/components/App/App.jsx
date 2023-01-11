@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
@@ -23,11 +24,9 @@ export class App extends Component {
       number,
     };
 
-    const data = this.state.contacts.map(contact => contact.name.toLowerCase());
-
-    const findName = data.some(item =>
-      item.includes(newContact.name.toLowerCase())
-    );
+    const findName = this.state.contacts
+      .map(contact => contact.name.toLowerCase())
+      .some(item => item.includes(newContact.name.toLowerCase().trim()));
 
     if (findName) {
       return alert(`${newContact.name} is already in contacts!`);
